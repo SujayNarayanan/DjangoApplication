@@ -1,0 +1,35 @@
+{% extends "app/layout.html" %}
+{% block summaryActive %}active{% endblock %}
+{% block content %}
+    <h1>Summary</h1>
+
+        <a href="{%url 'summary' %}" class="btn btn-primary {% if isSum %} active{% endif %}" role="button">Sum</a>
+        <a href="{% url 'summary-average' %}" class="btn btn-primary {% if not isSum %} active{% endif %}" role="button">Average</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>
+                    <strong>Date</strong>
+                    </td>
+                    <td>
+                    <strong>A value</strong>
+                    </td>
+                    <td>
+                    <strong>B value</strong>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+            {% for site in sites %}
+                <tr>
+                    <td>{{ site.name }}</td>
+                    <td>{{ site.aggAValue|floatformat:2}}</td>
+                    <td>{{ site.aggBValue|floatformat:2}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}
+
